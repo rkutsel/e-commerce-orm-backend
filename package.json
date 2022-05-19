@@ -1,26 +1,27 @@
 {
-  "name": "module-13-challenge-orm",
+  "name": "e-commerce-orm-backend",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "watch": "nodemon server.js",
-    "seed": "node seeds/index.js"
+    "seed":  "node seeds/index.js"
   },
-  "dev": "server.js", 
+  "dev": "npm run watch",
   "scripts": {
-  "start": "nodemon server.js"
-  },
+    "watch": "nodemon server.js",
+    "seed":  "nodemon seeds/index.js"
+    },
   "repository": {
     "type": "git",
-    "url": "git@work.github.com:coding-boot-camp/module-13-challenge-orm.git"
+    "url": "git@github.com:rkutsel/e-commerce-orm-backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "concurrently": "^7.2.0",
     "nodemon": "^2.0.16"
   },
   "dependencies": {

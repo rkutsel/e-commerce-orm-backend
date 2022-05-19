@@ -3,21 +3,48 @@ const { Product, Category, Tag, ProductTag } = require("../../models");
 
 // The `/api/products` endpoint
 
-// get all products
 router.get("/", (req, res) => {
-	// find all products
-	// be sure to include its associated Category and Tag data
+	// FIND ALL:
+	Product.findAll({
+		include: [
+			{ model: Category, required: true },
+			{
+				model: Tag,
+				required: true,
+				through: { model: ProductTag, attributes: [] },
+			},
+		],
+		limit: 100,
+	})
+		.then((allProducts) => res.status(200).json(allProducts))
+		.catch((err) => {
+			res.status(400).json(err);
+		});
 });
 
 // get one product
 router.get("/:id", (req, res) => {
-	// find a single product by its `id`
-	// be sure to include its associated Category and Tag data
+	// FIND ONE:
+	Product.findOne({
+		where: { id: req.params.id },
+		include: [
+			{ model: Category, required: true },
+			{
+				model: Tag,
+				required: true,
+				through: { model: ProductTag, attributes: [] },
+			},
+		],
+	})
+		.then((productName) => res.status(200).json(productName))
+		.catch((err) => {
+			res.status(400).json(err);
+		});
 });
 
 // create new product
 router.post("/", (req, res) => {
-	/* req.body should look like this...
+	/* CREATE:
     {
       product_name: "Basketball",
       price: 200.00,
@@ -90,6 +117,7 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
+	// DELETE: { "id": 4 }
 	Product.findOne({ where: { id: req.params.id } })
 		.then((productName) => {
 			Product.destroy({ where: { id: req.params.id } });
