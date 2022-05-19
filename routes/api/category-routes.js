@@ -55,9 +55,13 @@ router.put("/:id", (req, res) => {
 });
 
 router.delete("/:id", (req, res) => {
-	// DELETE: { "id": 4, "category_name": "Music"}
-	Category.destroy({ where: { id: req.body.id } })
-		.then(() => res.status(200).json(req.body))
+	// DELETE: { "id": 4 }
+	Category.findOne({ where: { id: req.body.id } })
+		.then((categoryName) => {
+			Category.destroy({ where: { id: req.body.id } });
+			return categoryName;
+		})
+		.then((categoryName) => res.status(200).json(categoryName))
 		.catch((err) => {
 			res.status(400).json(err);
 		});
