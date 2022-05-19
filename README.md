@@ -25,6 +25,10 @@ added 224 packages, and audited 225 packages in 6s
 found 0 vulnerabilities
 ```
 
+### Setup .env credentials
+Rename `.env.EXAMPLE` to `.env`. Open the `.env` file and change the variables as needed. 
+
+
 > ./db directory has schema.sql that needs to be imported into your MySQL. Note: this set up is not meant to be run in production.
 
 ### Import DB schema and seed data into MySQL
